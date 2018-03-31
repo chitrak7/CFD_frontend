@@ -1,0 +1,23 @@
+<h1> Fake News </h1>
+<p>Please enter link/article</p>
+
+<button (click) = "setLink(1)">
+    Link
+</button>
+<button (click) = "setLink(0)">Article</button>
+<div *ngIf="link">
+    <label>link:
+        <input #link>
+    </label>
+    <button (click) = "submitLink(link.value)">Submit</button>
+    <div *ngIf="load">Loading result</div>
+    <div *ngIf="res">{{res}}</div>
+</div>
+<div *ngIf="!link">
+    <label>Article:      
+        <input #article>
+    </label>
+    <button (click) = "submitArticle(article.value)">Submit</button>
+    <div *ngIf="load">Loading result</div>
+    <div *ngIf="res">{{res}}</div>
+</div>
