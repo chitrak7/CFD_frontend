@@ -1,23 +1,38 @@
 <h1> Fake News </h1>
 <p>Please enter link/article</p>
 
-<button (click) = "setLink(1)">
+<button (click) = "setLink(1)" type="submit" class="btn btn-default">
     Link
 </button>
-<button (click) = "setLink(0)">Article</button>
+<button (click) = "setLink(0)" type="submit" class="btn btn-default">Article</button>
+<div style="height:5px"></div>
 <div *ngIf="link">
-    <label>link:
-        <input #link>
-    </label>
-    <button (click) = "submitLink(link.value)">Submit</button>
+    <form>
+    <label for="link">Link:</label>
+    <input #link placeholder="link" type="text" class="form-control">
+    
+    <button (click) = "submitLink(link.value)" type="button" class="btn btn-default">Submit</button>
+    </form>
     <div *ngIf="load">Loading result</div>
-    <div *ngIf="res">{{res}}</div>
+    <div *ngIf="res">
+            <p>The Result of the search are as follows</p>
+            <p>fakenews  =  {{fake_res}}</p>
+            <p>biasness = {{bias_res}}</p>
+        </div>
 </div>
+
 <div *ngIf="!link">
-    <label>Article:      
-        <input #article>
-    </label>
-    <button (click) = "submitArticle(article.value)">Submit</button>
+    <form>
+    <label for="article">Article:</label>    
+    <input #article placeholder="article" type="text" class="form-control">
+    
+    <button (click) = "submitArticle(article.value)" type="submit" class="btn btn-default">Submit</button>
+    </form>
     <div *ngIf="load">Loading result</div>
-    <div *ngIf="res">{{res}}</div>
+    <div *ngIf="res">
+        <p>The Result of the search are as follows:</p>
+        <p>fakenews  =  {{fake_res}}</p>
+        <p>biasness = {{bias_res}}</p>
+        
+    </div>
 </div>
