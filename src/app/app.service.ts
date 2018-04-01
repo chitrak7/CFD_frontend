@@ -11,6 +11,7 @@ export class AppService {
     ) { }
     
     linkUrl = "http://localhost:8000/api/link"
+    updateUrl = "http://localhost:8000/api/update"
     articleUrl = "http://localhost:8000/api/article"
     submitLink(a:string): Observable<string>{
 	let url = this.linkUrl + "?url=" + a;      
@@ -26,5 +27,15 @@ export class AppService {
         return this.http.get<string>(this.articleUrl, {
             params:params
         })
+    }
+
+    update(link:string, fn: string, bs: number){
+        let resp = {
+            "link": link,
+            "fake_result": fn,
+            "bias_result": bs
+        }
+        console.log(JSON.stringify(resp));
+        this.http.post(this.updateUrl, JSON.stringify(resp)).subscribe(res =>  console.log("posted"));
     }
 }

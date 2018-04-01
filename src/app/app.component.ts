@@ -13,7 +13,7 @@ export class AppComponent  {
   key_phrases:string;
   bias_res:string;
   fake_res: string;
-  sentiment: number;
+  sentiment: string;
 
    constructor(private appService: AppService) { }   
    setLink(a:number){
@@ -29,7 +29,7 @@ export class AppComponent  {
         let resData = JSON.parse(JSON.stringify(res));
         this.fake_res = resData.fake_result;
         this.bias_res = this.bias_handle(resData.bias_result)
-        this.sentiment = resData.sentimentl;
+        this.sentiment = this.sentiment_handle(resData.sentiment);
         this.key_phrases = resData.key_phrases;
         this.load = 0;
         this.res=1
@@ -52,12 +52,35 @@ export class AppComponent  {
     )
    }
 
+   update(link:string) {
+     let bias = this.getBias(this.bias_res);
+     console.log("sfasf")
+     this.appService.update(link, this.fake_res, bias);
+   }
+
    bias_handle(a:string){
      if (a=="1")
-        return "right"
+        return "right";
     else if (a=="-1")
-     return "left"
+     return "left";
      else 
-      return "neutral"
+      return "neutral";
+   }
+
+   sentiment_handle(a:string): string{
+     let b = parseFloat(a)
+     if(b < 0.1 || b >0.9){
+       return "sensationalist"
+     } 
+     return "ideal"
+   }
+
+   getBias(a:string){
+     if (a=='left')
+        return -1;
+    else if (a == 'right')
+        return 1;
+    else  
+        return 0;
    }
 }
