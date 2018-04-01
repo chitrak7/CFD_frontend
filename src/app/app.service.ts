@@ -11,7 +11,7 @@ export class AppService {
     ) { }
     
     linkUrl = "http://localhost:8000/api/link"
-    updateUrl = "http://localhost:8000/api/update"
+    updateUrl = "http://localhost:8000/api/update/"
     articleUrl = "http://localhost:8000/api/article"
     submitLink(a:string): Observable<string>{
 	let url = this.linkUrl + "?url=" + a;      
